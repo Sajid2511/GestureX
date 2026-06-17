@@ -1,0 +1,6 @@
+cat > .gitignore << 'EOF'
+.gradle/
+build/
+*.lock
+local.properties
+EOF

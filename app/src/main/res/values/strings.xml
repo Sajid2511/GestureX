@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GestureX</string>
+    <string name="accessibility_service_label">GestureX Gesture Control</string>
+    <string name="accessibility_service_description">GestureX uses accessibility service to perform swipes, taps, and scrolls based on your hand gestures and phone movements. Enable this to control any app without touching the screen.</string>
+    <string name="notification_channel_name">GestureX Service</string>
+    <string name="notification_channel_description">Shows when GestureX gesture detection is running</string>
+    <string name="notification_title">GestureX Active</string>
+    <string name="notification_text">Gesture detection is running. Tap to open settings.</string>
+</resources>
