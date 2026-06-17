@@ -15,17 +15,15 @@ jobs:
       - uses: android-actions/setup-android@v3
       - name: Accept Licenses
         run: yes | sdkmanager --licenses || true
-      - name: Install Gradle
-        run: |
-          wget -q https://services.gradle.org/distributions/gradle-8.7-bin.zip
-          unzip -q gradle-8.7-bin.zip
-          export PATH=$PATH:$(pwd)/gradle-8.7/bin
-          echo "$(pwd)/gradle-8.7/bin" >> $GITHUB_PATH
       - name: Download MediaPipe Models
         run: |
           mkdir -p app/src/main/assets
           wget -q -O app/src/main/assets/hand_landmarker.task https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/latest/hand_landmarker.task
           wget -q -O app/src/main/assets/gesture_recognizer.task https://storage.googleapis.com/mediapipe-models/gesture_recognizer/gesture_recognizer/float16/latest/gesture_recognizer.task
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: '8.7'
       - name: Build APK
         run: gradle assembleDebug --no-daemon
       - name: Upload APK
