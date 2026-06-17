@@ -15,8 +15,8 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      # Yeh step bina jar file ke khud naya wrapper download kar ke set kar dega
-      - name: Setup Gradle
+      # 1. Yeh step GitHub server par Gradle tool ko setup karega (Yeh pehle miss ho gaya tha)
+      - name: Setup Gradle Tool
         uses: gradle/actions/setup-gradle@v3
 
       - uses: android-actions/setup-android@v3
@@ -29,6 +29,10 @@ jobs:
           mkdir -p app/src/main/assets
           wget -q -O app/src/main/assets/hand_landmarker.task https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/latest/hand_landmarker.task
           wget -q -O app/src/main/assets/gesture_recognizer.task https://storage.googleapis.com/mediapipe-models/gesture_recognizer/gesture_recognizer/float16/latest/gesture_recognizer.task
+
+      # 2. Ab yeh command bina kisi dikkat ke ek fresh 'gradle-wrapper.jar' generate kar degi
+      - name: Regenerate Gradle Wrapper
+        run: gradle wrapper --gradle-version 8.4
 
       - name: Make gradlew executable
         run: chmod +x ./gradlew
