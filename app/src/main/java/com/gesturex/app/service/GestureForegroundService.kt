@@ -6,6 +6,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.Matrix
 import android.os.IBinder
 import android.util.Log
 import androidx.camera.core.CameraSelector
@@ -293,6 +294,3 @@ class GestureForegroundService : LifecycleService() {
         nm.createNotificationChannel(channel)
     }
 }
-
-// Extension to avoid import conflict
-private fun android.graphics.Matrix() = android.graphics.Matrix()
