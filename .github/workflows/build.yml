@@ -1,0 +1,32 @@
+name: Build GestureX APK
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - uses: android-actions/setup-android@v3
+      - name: Accept Licenses
+        run: yes | sdkmanager --licenses || true
+      - name: Download MediaPipe Models
+        run: |
+          mkdir -p app/src/main/assets
+          wget -q -O app/src/main/assets/hand_landmarker.task https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/latest/hand_landmarker.task
+          wget -q -O app/src/main/assets/gesture_recognizer.task https://storage.googleapis.com/mediapipe-models/gesture_recognizer/gesture_recognizer/float16/latest/gesture_recognizer.task
+      - name: Make gradlew executable
+        run: chmod +x gradlew
+      - name: Build APK
+        run: ./gradlew assembleDebug --no-daemon
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: GestureX-APK
+          path: app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 7
