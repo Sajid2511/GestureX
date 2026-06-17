@@ -15,6 +15,10 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      # Yeh step kharab gradle wrapper ko automatic theek kar dega
+      - name: Validate Gradle Wrapper
+        uses: gradle/actions/wrapper-validation@v3
+
       - uses: android-actions/setup-android@v3
 
       - name: Accept Licenses
@@ -27,7 +31,7 @@ jobs:
           wget -q -O app/src/main/assets/gesture_recognizer.task https://storage.googleapis.com/mediapipe-models/gesture_recognizer/gesture_recognizer/float16/latest/gesture_recognizer.task
 
       - name: Make gradlew executable
-        run: chmod +x ./gradlew  # <-- Humne yahan ./ lagaya hai taaki runner ko exact path mile
+        run: chmod +x ./gradlew
 
       - name: Build APK
         run: ./gradlew assembleDebug --no-daemon
