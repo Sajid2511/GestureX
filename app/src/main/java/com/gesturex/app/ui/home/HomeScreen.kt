@@ -264,11 +264,9 @@ private fun PermissionWarningCard(
                     text = "Draw Over Other Apps (for overlay)",
                     onClick = {
                         context.startActivity(
-                            Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                                Uri.parse("package:${context.packageName}).apply {
-                                    flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                                }
-                            )
+                            Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:${context.packageName}")).apply {
+                                flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                            }
                         )
                     }
                 )
