@@ -15,9 +15,9 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      # Yeh step kharab gradle wrapper ko automatic theek kar dega
-      - name: Validate Gradle Wrapper
-        uses: gradle/actions/wrapper-validation@v3
+      # Yeh step bina jar file ke khud naya wrapper download kar ke set kar dega
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
 
       - uses: android-actions/setup-android@v3
 
